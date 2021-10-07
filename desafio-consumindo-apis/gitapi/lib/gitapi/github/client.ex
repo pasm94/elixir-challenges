@@ -6,14 +6,24 @@ defmodule Gitapi.Github.Client do
   plug Tesla.Middleware.JSON
 
   def get_user_repos(user) do
-    with {:ok, %Tesla.Env{body: rest}} = Tesla.get("#{@base_url}#{user}/repos") do
-      rest
+    with {:ok, %Tesla.Env{body: repositories}} = Tesla.get("#{@base_url}#{user}/repos") do
+      %{"name" => name} =
+        repositories
+        |> Poison.decode!()
+        |> List.first()
+
+      {:ok, name: name}
     end
   end
 
   def get_user_repos() do
-    with {:ok, %Tesla.Env{body: rest}} = Tesla.get("#{@base_url}pasm94/repos") do
-      rest
+    with {:ok, %Tesla.Env{body: repositories}} = Tesla.get("#{@base_url}pasm94/repos") do
+      %{"name" => name} =
+        repositories
+        |> Poison.decode!()
+        |> List.first()
+
+      {:ok, name: name}
     end
   end
 end
