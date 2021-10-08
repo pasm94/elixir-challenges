@@ -1,5 +1,6 @@
 defmodule Gitapi do
-  alias Gitapi.Github.Client, as: GetGithubRepo
+  alias Gitapi.Github.Client, as: GetGithubRepositories
 
-  defdelegate user_repo(), to: GetGithubRepo, as: :get_user_repos
+  defdelegate get_user_repositories(), to: GetGithubRepositories, as: :get_user_repos
+  defdelegate get_user_repositories(user_name), to: GetGithubRepositories, as: :get_user_repos
 end

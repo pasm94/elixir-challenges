@@ -7,12 +7,9 @@ defmodule Gitapi.Github.Client do
 
   def get_user_repos(user) do
     with {:ok, %Tesla.Env{body: repositories}} = Tesla.get("#{@base_url}#{user}/repos") do
-      %{"name" => name} =
-        repositories
-        |> Poison.decode!()
-        |> List.first()
-
-      {:ok, name: name}
+      repositories
+      |> Poison.decode!()
+      |> Enum.map(fn %{"name" => names} -> names end)
     end
   end
 
