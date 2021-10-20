@@ -45,7 +45,8 @@ defmodule Gitapi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
-      {:poison, "~> 5.0"}
+      {:poison, "~> 5.0"},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
 
